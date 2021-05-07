@@ -57,7 +57,8 @@ switch ($action) {
     <script type="text/javascript">
       var nodos = new vis.DataSet([
         <?php
-          $raiz = $_SESSION['Arbol']->getRaiz();
+     
+     $raiz = $_SESSION['Arbol']->getRaiz();
           if($raiz!=null){
             $_SESSION['Arbol']->mostrarNodos($raiz);
           }
@@ -81,3 +82,14 @@ switch ($action) {
     </script>
   </body>
 </html>
+
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="Botomcont" value="contar">
+</form>
+
+<?php
+if(isset($_POST["Botomcont"]) !=null){
+ $_SESSION['Arbol']->tomar();
+}
+?>

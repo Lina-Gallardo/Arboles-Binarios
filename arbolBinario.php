@@ -103,7 +103,30 @@ class ArbolBinario {
     }
   }
 
+
+  
+function contar ($Nod){
+  
+  if($Nod != null){
+    if($Nod != null){
+
+     return self::contar($Nod->getIzquierdo()) + self::contar($Nod->getDerecho()) + 1;
+       
+    }else{
+      return 1;
+    }
+  }else{
+    return 0;
+  }
+  
 }
 
+function tomar (){
+  $total=0;
+$nodo=$this->raiz;
+$total=$total + $this->contar($nodo);
+echo $total;
+}
 
+}
 ?>
