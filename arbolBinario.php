@@ -97,7 +97,7 @@ class ArbolBinario {
 
   function recorrerPreOrden($node) {
     if($node!=null){
-      echo "Nodo ".$node->getId();
+      echo "- Nodo ".$node->getId();
       self::recorrerPreOrden($node->getIzquierdo());
       self::recorrerPreOrden($node->getDerecho());
     }
@@ -121,12 +121,64 @@ function contar ($Nod){
   
 }
 
-function tomar (){
+function tomarcontar (){
   $total=0;
 $nodo=$this->raiz;
 $total=$total + $this->contar($nodo);
 echo $total;
 }
 
+function Hojas($raiz){
+  
+  if($raiz != null){
+    
+    if((($raiz->getIzquierdo()) == null) && (($raiz->getDerecho()) == null )){
+     
+      $id=$raiz->getId();
+      echo "-".$id;
+      
+    }
+    self::Hojas($raiz->getIzquierdo());
+    self::Hojas($raiz->getDerecho());
+  }
+}
+
+function pares($raiz){
+  if($raiz != null){
+
+
+    $id=$raiz->getId();
+
+    if(($id % 2 )== 0){
+      echo $id."-";
+    }
+    self::pares($raiz->getIzquierdo());
+    self::pares($raiz->getDerecho());
+      
+    }
+  }
+
+  public $NodosArray=[];
+  function ArbolCompleto($raiz){
+   $node=$raiz;
+    if($node != null){
+      if((($node->getIzquierdo() == null) && (($node->getDerecho()) == null)) || (($node->getIzquierdo() != null) && (($node->getDerecho()) != null))){
+        array_push($this->NodosArray, 1);
+      }else{
+        array_push($this->NodosArray, 2);
+      }
+      self::ArbolCompleto($node->getIzquierdo());
+      self::ArbolCompleto($node->getDerecho());
+    }
+    return $this->NodosArray;
+    $this->NodosArray=null;
+  }
+  function getNodoArray(){
+    $this->NodosArray=[];
+  }
+  function setNodoArray(){
+    $this->NodosArray=null;
+  }
+ 
 }
 ?>

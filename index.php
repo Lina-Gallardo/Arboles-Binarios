@@ -88,8 +88,65 @@ switch ($action) {
   <input type="submit" name="Botomcont" value="contar">
 </form>
 
+<form class="" action="index.php" method="post">
+  <input type="submit" name="BotomHoj" value="Hojas">
+</form>
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="BotomAlt" value="Altura">
+</form>
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="BotomPar" value="Pares">
+</form>
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="BotomCom" value="Completo">
+</form>
+
 <?php
 if(isset($_POST["Botomcont"]) !=null){
- $_SESSION['Arbol']->tomar();
+ $_SESSION['Arbol']->tomarcontar();
 }
+?>
+
+<?php
+if(isset($_POST["BotomHoj"]) != null){
+  $_SESSION['Arbol']->Hojas($_SESSION['Arbol']->getRaiz());
+}
+?>
+
+
+<?php
+if(isset($_POST["BotomAlt"]) !=null){
+ $_SESSION['Arbol']->tomarAltura();
+}
+?>
+
+
+<?php
+if(isset($_POST["BotomPar"]) !=null){
+ $_SESSION['Arbol']->Pares($_SESSION['Arbol']->getRaiz());
+}
+?>
+
+<?php
+if(isset($_POST["BotomCom"]) !=null){
+  $contador=0;
+  $fal=0;
+  $_SESSION['Arbol']->getNodoArray();
+  $dato = $_SESSION['Arbol']->ArbolCompleto($_SESSION['Arbol']->getRaiz());
+  if($dato!=null){
+    $message = (in_array(2,$dato))? "No esta completo" : "Completo";
+    echo $message;
+    $_SESSION['Arbol']->setNodoArray();
+  }
+
+foreach ($dato as $key )
+if($key==2){
+$fal =  $contador=$contador+1;
+}
+  echo "<br> Faltan ".$fal." nodos";
+  }
+
 ?>
