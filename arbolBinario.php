@@ -42,10 +42,10 @@ class ArbolBinario {
         }
         echo "Guardado correctamente";
       }else{
-        echo "No exite la raiz o el elemento esta repetido";
+        echo "No existe la raíz o el elemento esta repetido";
       }
     }else{
-      echo "No existe raiz";
+      echo "No existe raíz";
     }
   }
 
@@ -77,8 +77,6 @@ class ArbolBinario {
   function mostarAristas($raiz){
     if($raiz!=null){
       $id=$raiz->getId();
-      // $destino='1';
-
       if($raiz->getIzquierdo()!=null){
         $destino = $raiz->getIzquierdo()->getId();
         echo "{from: '$id', to: '$destino'},";
@@ -87,9 +85,6 @@ class ArbolBinario {
         $destino = $raiz->getDerecho()->getId();
         echo "{from: '$id', to: '$destino'},";
       }
-
-      // $destino = $raiz->getDerecho()->getId();
-      // echo "{from: '$id', to: '$destino'},";
       self::mostarAristas($raiz->getIzquierdo());
       self::mostarAristas($raiz->getDerecho());
     }
@@ -103,6 +98,23 @@ class ArbolBinario {
     }
   }
 
+  function eliminar($raiz, $nodo){
+    $nodoEliminar = self::buscarNodo($this->raiz,$nodo);
+    if(($raiz!=null) && ($nodoEliminar!=null) && ($nodoEliminar->getIzquierdo()==null && $nodoEliminar->getDerecho()==null)){
+      $izquierdo = $raiz->getIzquierdo();
+      $derecho = $raiz->getDerecho();
+      if(!empty($izquierdo) && ($izquierdo->getId() == $nodo)){
+        $raiz->setIzquierdo(null);
+        return true;
+      }
+      if(!empty($derecho) && ($derecho->getId() == $nodo)){
+        $raiz->setDerecho(null);
+        return true;
+      }
+      self::eliminar($raiz->getIzquierdo(), $nodo);
+      self::eliminar($raiz->getDerecho(), $nodo);
+    }
+  }
 }
 
 
