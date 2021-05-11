@@ -47,10 +47,6 @@ switch ($action) {
     case 'Altura':
       $respuesta = $_SESSION['Arbol']->Altura($_SESSION['Arbol']->getRaiz());
       break;
-
-  default:
-    if($_SESSION['Arbol']) echo $_SESSION['Arbol']->altura($_SESSION['Arbol']->getRaiz());
-    break;
 }
 ?>
 <!DOCTYPE html>
@@ -71,7 +67,7 @@ switch ($action) {
       <h2>Crear Árbol</h2>
       <form class="" action="index.php" method="post">
         <input type="text" name="raiz" placeholder="Raiz" required>
-        <input type="submit" name="action" value="Crear Árbol">
+        <input class="color-green" type="submit" name="action" value="Crear Árbol">
       </form>
     </div>
     <div class="content-box">
@@ -84,29 +80,30 @@ switch ($action) {
           <label for="derecha">Derecha</label>
         </div>
         <input type="text" name="nombreHijo" placeholder="Nombre del hijo" required>
-        <input type="submit" name="action" value="Agregar Nodo">
+        <input class="color-green" type="submit" name="action" value="Agregar Nodo">
       </form>
     </div>
     <div class="content-box">
       <form class="" action="index.php" method="post">
         <input type="text" name="nodo" placeholder="Nombre Nodo" required>
-        <input type="submit" name="action" value="Eliminar Nodo">
+        <input class="color-red" type="submit" name="action" value="Eliminar Nodo">
       </form>
+      <hr>
     </div>
-    <div class="container" id="Arbol1">
-
-    </div>
-    <div class="container">
+    <div class="content-box">
       <form action="index.php" method="post">
-        <input type="submit" name="action" value="In-Orden">
-        <input type="submit" name="action" value="Pre-Orden">
-       <input type="submit" name="action" value="Post-Orden">
-       <input type="submit" name="action" value="Por Niveles">
-       <input type="submit" name="action" value="Altura">
+        <input class="btn" type="submit" name="action" value="In-Orden">
+        <input class="btn" type="submit" name="action" value="Pre-Orden">
+        <input class="btn" type="submit" name="action" value="Post-Orden">
+        <input class="btn" type="submit" name="action" value="Por Niveles">
+        <input class="btn" type="submit" name="action" value="Altura">
       </form>
       <div class="mostrar">
         <?php echo "".($respuesta? $respuesta:""); ?>
       </div>
+    </div>
+    <div class="container" id="Arbol1">
+
     </div>
     <script type="text/javascript">
       var nodos = new vis.DataSet([
