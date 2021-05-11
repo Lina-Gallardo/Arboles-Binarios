@@ -145,6 +145,7 @@ class ArbolBinario {
     return $respuesta;
   }
 
+<<<<<<< HEAD
   function altura($nodoActual){
     if($nodoActual==null){
       return 0;
@@ -174,8 +175,90 @@ class ArbolBinario {
       self::eliminar($raiz->getIzquierdo(), $nodo);
       self::eliminar($raiz->getDerecho(), $nodo);
     }
+=======
+
+
+function contar ($Nod){
+
+  if($Nod != null){
+    if($Nod != null){
+
+     return self::contar($Nod->getIzquierdo()) + self::contar($Nod->getDerecho()) + 1;
+
+    }else{
+      return 1;
+    }
+  }else{
+    return 0;
+  }
+
+}
+
+function tomarcontar (){
+  $total=0;
+$nodo=$this->raiz;
+$total=$total + $this->contar($nodo);
+echo $total;
+}
+
+function Hojas($raiz){
+
+  if($raiz != null){
+
+
+    if((($raiz->getIzquierdo()) == null) && (($raiz->getDerecho()) == null )){
+
+      $id=$raiz->getId();
+      echo "{id:'$id',label:'$id',color:{background:'pink'}},";
+
+    }else{
+      $id=$raiz->getId();
+    echo "{id:'$id',label:'$id'},";
+    }
+    self::Hojas($raiz->getIzquierdo());
+    self::Hojas($raiz->getDerecho());
+>>>>>>> ramitablack
   }
 }
 
+function pares($raiz){
+  if($raiz != null){
 
+
+    $id=$raiz->getId();
+
+    if(($id % 2 )== 0){
+      echo "{id:'$id',label:'$id',color:{background:'pink'}},";
+    }else{
+      echo "{id:'$id',label:'$id'},";
+    }
+    self::pares($raiz->getIzquierdo());
+    self::pares($raiz->getDerecho());
+
+    }
+  }
+
+  public $NodosArray=[];
+  function ArbolCompleto($raiz){
+   $node=$raiz;
+    if($node != null){
+      if((($node->getIzquierdo() == null) && (($node->getDerecho()) == null)) || (($node->getIzquierdo() != null) && (($node->getDerecho()) != null))){
+        array_push($this->NodosArray, 1);
+      }else{
+        array_push($this->NodosArray, 2);
+      }
+      self::ArbolCompleto($node->getIzquierdo());
+      self::ArbolCompleto($node->getDerecho());
+    }
+    return $this->NodosArray;
+    $this->NodosArray=null;
+  }
+  function getNodoArray(){
+    $this->NodosArray=[];
+  }
+  function setNodoArray(){
+    $this->NodosArray=null;
+  }
+
+}
 ?>

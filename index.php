@@ -108,10 +108,29 @@ switch ($action) {
     <script type="text/javascript">
       var nodos = new vis.DataSet([
         <?php
-          $raiz = $_SESSION['Arbol']->getRaiz();
+      if((isset($_POST["action"]) != null) || (isset($_POST["Mostrar"]) != null)){
+     $raiz = $_SESSION['Arbol']->getRaiz();
           if($raiz!=null){
             $_SESSION['Arbol']->mostrarNodos($raiz);
           }
+        }
+          if(isset($_POST["BotomHoj"]) != null){
+            $raiz = $_SESSION['Arbol']->getRaiz();
+                 if($raiz!=null){
+                   $_SESSION['Arbol']->Hojas($raiz);
+                 }else{
+                  echo "<script>alert('El arbol no existe');</script>"; 
+                 }
+               }
+       
+               if(isset($_POST["BotomPar"]) !=null){
+            $raiz = $_SESSION['Arbol']->getRaiz();
+                 if($raiz!=null){
+                   $_SESSION['Arbol']->Pares($raiz);
+                 }else{
+                  echo "<script>alert('El arbol no existe');</script>"; 
+                 }
+               }
         ?>
       ]);
       var aristas = new vis.DataSet([
@@ -122,13 +141,110 @@ switch ($action) {
           }
         ?>
       ]);
-      var contenedor = document.getElementById('Arbol1');
-      var opciones = {edges:{arrows:{to:{enabled:true}}}};
+    var contenedor = document.getElementById('Arbol1');
+    var opciones = 
+    { layout: 
+     { hierarchical: 
+       { direction: "UD", 
+         sortMethod: "directed",
+         },
+      },
+         edges:
+         { smooth:
+           { 
+             type: "cubicBezier",
+           },
+             arrows:
+             { to:
+                {
+                  enabled:true
+                },
+              },
+                     
+          },
+    };
+
       var datos = {
         nodes: nodos,
         edges: aristas
-      }
+      };
       var info = new vis.Network(contenedor, datos, opciones);
+
+ 
     </script>
   </body>
 </html>
+
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="Botomcont" value="contar">
+</form>
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="BotomHoj" value="Hojas">
+</form>
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="BotomPar" value="Pares">
+</form>
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="BotomCom" value="Completo">
+</form>
+
+<form class="" action="index.php" method="post">
+  <input type="submit" name="Mostrar" value="Mostrar">
+</form>
+
+<?php
+if(isset($_POST["Botomcont"]) !=null){
+ $_SESSION['Arbol']->tomarcontar();
+}
+?>
+
+
+
+<?php
+/*if(isset($_POST["BotomHoj"]) != null){
+  $_SESSION['Arbol']->Hojas($_SESSION['Arbol']->getRaiz());
+}*/
+?>
+ 
+
+<?php
+/*
+if(isset($_POST["BotomPar"]) !=null){
+ $_SESSION['Arbol']->Pares($_SESSION['Arbol']->getRaiz());
+} */
+?>
+
+
+
+<?php
+if(isset($_POST["BotomCom"]) !=null){
+  $contador=0;
+  $fal=0;
+  $raiz=$_SESSION['Arbol']->getRaiz();
+  $_SESSION['Arbol']->getNodoArray();
+  $dato = $_SESSION['Arbol']->ArbolCompleto($_SESSION['Arbol']->getRaiz());
+  if($raiz != null){
+  if($dato!=null){
+    $message = (in_array(2,$dato))? "No esta completo" : "Completo";
+    echo $message;
+    $_SESSION['Arbol']->setNodoArray();
+  }
+}else{
+  echo "<script>alert('El arbol no existe');</script>"; 
+}
+
+  if($raiz != null){
+    foreach ($dato as $key )
+   {
+     if($key==2){
+      $fal =  $contador=$contador+1;
+     }
+   }
+   echo "<br> Faltan ".$fal." nodos";
+ }
+}
+?>
