@@ -132,11 +132,15 @@ function Hojas($raiz){
   
   if($raiz != null){
     
+
     if((($raiz->getIzquierdo()) == null) && (($raiz->getDerecho()) == null )){
      
       $id=$raiz->getId();
-      echo "-".$id;
+      echo "{id:'$id',label:'$id',color:{background:'pink'}},";
       
+    }else{
+      $id=$raiz->getId();
+    echo "{id:'$id',label:'$id'},";
     }
     self::Hojas($raiz->getIzquierdo());
     self::Hojas($raiz->getDerecho());
@@ -150,7 +154,9 @@ function pares($raiz){
     $id=$raiz->getId();
 
     if(($id % 2 )== 0){
-      echo $id."-";
+      echo "{id:'$id',label:'$id',color:{background:'pink'}},";
+    }else{
+      echo "{id:'$id',label:'$id'},";
     }
     self::pares($raiz->getIzquierdo());
     self::pares($raiz->getDerecho());
