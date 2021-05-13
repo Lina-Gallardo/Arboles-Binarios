@@ -6,6 +6,7 @@ include ('nodo.php');
 class ArbolBinario {
   private $raiz;
   public $respuesta = "";
+  public $NodosArray=[];
 
   function __construct() {
     $this->raiz = null;
@@ -17,6 +18,10 @@ class ArbolBinario {
 
   function getRaiz(){
     return $this->raiz;
+  }
+
+  function getNodoArray(){
+    $this->NodosArray=[];
   }
 
   function inicializar(){
@@ -45,12 +50,12 @@ class ArbolBinario {
             $nodo->setDerecho($Anterior);
           }
         }
-        echo "Guardado correctamente";
+        return "Guardado correctamente";
       }else{
-        echo "No existe la raíz o el elemento esta repetido";
+        return "No existe nodo padre o el elemento esta repetido";
       }
     }else{
-      echo "No existe raíz";
+      return "No existe raíz";
     }
   }
 
@@ -145,7 +150,6 @@ class ArbolBinario {
     return $respuesta;
   }
 
-<<<<<<< HEAD
   function altura($nodoActual){
     if($nodoActual==null){
       return 0;
@@ -161,84 +165,76 @@ class ArbolBinario {
 
   function eliminar($raiz, $nodo){
     $nodoEliminar = self::buscarNodo($this->raiz,$nodo);
-    if(($raiz!=null) && ($nodoEliminar!=null) && ($nodoEliminar->getIzquierdo()==null && $nodoEliminar->getDerecho()==null)){
-      $izquierdo = $raiz->getIzquierdo();
-      $derecho = $raiz->getDerecho();
-      if(!empty($izquierdo) && ($izquierdo->getId() == $nodo)){
-        $raiz->setIzquierdo(null);
-        return true;
+    if(!empty($nodoEliminar)){
+      if(($raiz!=null) && ($nodoEliminar!=null) && ($nodoEliminar->getIzquierdo()==null && $nodoEliminar->getDerecho()==null)){
+        if($raiz->getId()==$nodo){
+          self::crearArbol(null);
+        }else{
+          $izquierdo = $raiz->getIzquierdo();
+          $derecho = $raiz->getDerecho();
+          if(!empty($izquierdo) && ($izquierdo->getId() == $nodo)){
+            $raiz->setIzquierdo(null);
+          }
+          if(!empty($derecho) && ($derecho->getId() == $nodo)){
+            $raiz->setDerecho(null);
+          }
+          self::eliminar($raiz->getIzquierdo(), $nodo);
+          self::eliminar($raiz->getDerecho(), $nodo);
+        }
+        return "Eliminado con éxito";
       }
-      if(!empty($derecho) && ($derecho->getId() == $nodo)){
-        $raiz->setDerecho(null);
-        return true;
-      }
-      self::eliminar($raiz->getIzquierdo(), $nodo);
-      self::eliminar($raiz->getDerecho(), $nodo);
+      return "El nodo no se puede eliminar";
+    }else{
+      return "El nodo que desea eliminar no existe";
     }
-=======
+  }
 
-
-function contar ($Nod){
-
-  if($Nod != null){
+  function contar ($Nod){
     if($Nod != null){
-
-     return self::contar($Nod->getIzquierdo()) + self::contar($Nod->getDerecho()) + 1;
-
+      if($Nod != null){
+       return self::contar($Nod->getIzquierdo()) + self::contar($Nod->getDerecho()) + 1;
+      }else{
+        return 1;
+      }
     }else{
-      return 1;
+      return 0;
     }
-  }else{
-    return 0;
   }
 
-}
-
-function tomarcontar (){
-  $total=0;
-$nodo=$this->raiz;
-$total=$total + $this->contar($nodo);
-echo $total;
-}
-
-function Hojas($raiz){
-
-  if($raiz != null){
-
-
-    if((($raiz->getIzquierdo()) == null) && (($raiz->getDerecho()) == null )){
-
-      $id=$raiz->getId();
-      echo "{id:'$id',label:'$id',color:{background:'pink'}},";
-
-    }else{
-      $id=$raiz->getId();
-    echo "{id:'$id',label:'$id'},";
-    }
-    self::Hojas($raiz->getIzquierdo());
-    self::Hojas($raiz->getDerecho());
->>>>>>> ramitablack
+  function tomarcontar (){
+    $total=0;
+    $nodo=$this->raiz;
+    $total=$total + $this->contar($nodo);
+    return $total;
   }
-}
 
-function pares($raiz){
-  if($raiz != null){
-
-
-    $id=$raiz->getId();
-
-    if(($id % 2 )== 0){
-      echo "{id:'$id',label:'$id',color:{background:'pink'}},";
-    }else{
+  function Hojas($raiz){
+    if($raiz != null){
+      if((($raiz->getIzquierdo()) == null) && (($raiz->getDerecho()) == null )){
+        $id=$raiz->getId();
+        echo "{id:'$id',label:'$id',color:{background:'pink'}},";
+      }else{
+        $id=$raiz->getId();
       echo "{id:'$id',label:'$id'},";
-    }
-    self::pares($raiz->getIzquierdo());
-    self::pares($raiz->getDerecho());
-
+      }
+      self::Hojas($raiz->getIzquierdo());
+      self::Hojas($raiz->getDerecho());
     }
   }
 
-  public $NodosArray=[];
+  function pares($raiz){
+    if($raiz != null){
+      $id=$raiz->getId();
+      if(($id % 2 )== 0){
+        echo "{id:'$id',label:'$id',color:{background:'pink'}},";
+      }else{
+        echo "{id:'$id',label:'$id'},";
+      }
+      self::pares($raiz->getIzquierdo());
+      self::pares($raiz->getDerecho());
+    }
+  }
+
   function ArbolCompleto($raiz){
    $node=$raiz;
     if($node != null){
@@ -251,13 +247,6 @@ function pares($raiz){
       self::ArbolCompleto($node->getDerecho());
     }
     return $this->NodosArray;
-    $this->NodosArray=null;
-  }
-  function getNodoArray(){
-    $this->NodosArray=[];
-  }
-  function setNodoArray(){
-    $this->NodosArray=null;
   }
 
 }
