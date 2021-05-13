@@ -1,12 +1,6 @@
 body{
   margin: 30px 90px 30px 90px;
   background-color: #BFE1F0;
-  /* background-image: url(fondo.jfif);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  position: relative; */
-  /* background-position: center center; */
 }
 div h1, h2{
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -40,11 +34,10 @@ form input[type="submit"]:hover{
   color: white;
 }
 .btn{
-  width: 200px;
-  display: block;
-  margin: 5px;
-  /* border: 1.8px solid #650FC5;
-  background-color: #B783F1; */
+  width: 150px;
+  display: inline-block;
+  margin: 3px;
+  margin-left: 15px;
 }
 .fondo{
   position: relative;
@@ -52,18 +45,8 @@ form input[type="submit"]:hover{
   background: rgb(148,38,212);
   background: linear-gradient(141deg, rgba(148,38,212,0.636758927203694) 43%, rgba(241,139,246,0.6227533249627977) 94%);
 }
-/* .color-red{
-  border: 1.6px solid DarkRed;
-  background-color: #E02D2D;
-}
-.color-green{
-  border: 1.6px solid DarkGreen;
-  background-color: #39BC67;
-} */
 .content-box{
   width: 520px;
-  /* background-color: rgba(123, 161, 247,0.5); */
-  /* border: 1px solid lightgray; */
   padding: 10px;
 }
 .box{
@@ -71,7 +54,6 @@ form input[type="submit"]:hover{
   height: 40px;
   padding: 7px 5px 7px 5px;
   align-content: space-between;
-  /* border: 1px solid lightgray; */
   display: inline-block;
 }
 .container{
@@ -80,7 +62,7 @@ form input[type="submit"]:hover{
   height: 450px;
   border-radius: 10px;
   margin-left: 550px;
-  margin-top: -50%;
+  margin-top: -42%;
   position: relative;
   background: white;
 }
@@ -90,7 +72,7 @@ form input[type="submit"]:hover{
   border: 1px solid black;
   width: 400px;
   height: 60px;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   background: #ffff;
   text-align: center;
   margin-left: auto;
