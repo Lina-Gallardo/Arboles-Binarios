@@ -226,6 +226,7 @@ class ArbolBinario {
     if($raiz != null){
       $id=$raiz->getId();
       if(($id % 2 )== 0){
+        array_push($this->NodosArray,$id);
         echo "{id:'$id',label:'$id',color:{background:'pink'}},";
       }else{
         echo "{id:'$id',label:'$id'},";
@@ -233,6 +234,7 @@ class ArbolBinario {
       self::pares($raiz->getIzquierdo());
       self::pares($raiz->getDerecho());
     }
+    return $this->NodosArray;
   }
 
   function ArbolCompleto($raiz){

@@ -144,7 +144,9 @@ switch ($action) {
               break;
             case 'Pares':
               if($raiz!=null){
-                $_SESSION['Arbol']->Pares($raiz);
+                $_SESSION['Arbol']->getNodoArray();
+                $array = $_SESSION['Arbol']->Pares($raiz);
+                $respuesta = sizeof($array);
               }else{
                 $respuesta = "El árbol no existe";
               }
@@ -159,7 +161,7 @@ switch ($action) {
       ]);
 
       <?php if(isset($respuesta) && ($action=="Hojas")|| $action=="Pares"){ ?>
-        document.getElementById("mj").innerHTML='<?php echo $respuesta ?>';
+        document.getElementById("mensaje").innerHTML='<?php echo $respuesta ?>';
       <?php } ?>
       var aristas = new vis.DataSet([
         <?php
